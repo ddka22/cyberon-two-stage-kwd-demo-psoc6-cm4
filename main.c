@@ -72,8 +72,6 @@ int main(void)
     printf("\x1b[2J\x1b[;H");
     printf("===== Cyberon Keyword Detection Engine Demo =====\r\n");
 
-
-
     uid = Cy_SysLib_GetUniqueId();
     printf("uniqueIdHi: 0x%08lX, uniqueIdLo: 0x%08lX\r\n", (uint32_t)(uid >> 32), (uint32_t)(uid << 32 >> 32));
 
@@ -81,6 +79,8 @@ int main(void)
     {
     	while(1);
     }
+
+    printf("\r\nAwaiting voice input trigger command (\"Hello CyberVoice\"):\r\n");
 
     while(1)
     {
@@ -116,13 +116,11 @@ void pdm_pcm_isr_handler(void *arg, cyhal_pdm_pcm_event_t event)
 
 void clock_init(void)
 {
-    cyhal_clock_get(&pll_clock, &CYHAL_CLOCK_PLL[0]);
-    cyhal_clock_init(&pll_clock);
+	cyhal_clock_reserve(&pll_clock, &CYHAL_CLOCK_PLL[0]);
     cyhal_clock_set_frequency(&pll_clock, AUDIO_SYS_CLOCK_HZ, NULL);
     cyhal_clock_set_enabled(&pll_clock, true, true);
 
-    cyhal_clock_get(&audio_clock, &CYHAL_CLOCK_HF[1]);
-    cyhal_clock_init(&audio_clock);
+    cyhal_clock_reserve(&audio_clock, &CYHAL_CLOCK_HF[1]);
 
     cyhal_clock_set_source(&audio_clock, &pll_clock);
     cyhal_clock_set_enabled(&audio_clock, true, true);
