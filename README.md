@@ -12,8 +12,6 @@ This demo package demonstrates how to use Cyberon keyword detection engine for C
 ## Supported toolchains (make variable 'TOOLCHAIN')
 
 - GNU Arm® embedded compiler v10.3.1 (`GCC_ARM`) - Default value of `TOOLCHAIN`
-- Arm&reg; compiler v6.13 (`ARM`)
-- IAR C/C++ compiler v8.42.2 (`IAR`)
 
 ## Supported Kits (make variable 'TARGET')
 
